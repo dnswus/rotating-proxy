@@ -97,10 +97,11 @@ module Service
     def start
       super
       exit_nodes = ENV['EXIT_NODES']
+      new_circuit_period = ENV['NEW_CIRCUIT_PERIOD'] || '15'
       self.class.fire_and_forget(executable,
         "--SocksPort #{port}",
 	"--ControlPort #{control_port}",
-        "--NewCircuitPeriod 15",
+        "--NewCircuitPeriod #{new_circuit_period}",
 	"--MaxCircuitDirtiness 15",
 	"--UseEntryGuards 0",
 	"--UseEntryGuardsAsDirGuards 0",
