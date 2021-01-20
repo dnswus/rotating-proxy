@@ -96,6 +96,7 @@ module Service
 
     def start
       super
+      exit_nodes = ENV['EXIT_NODES']
       self.class.fire_and_forget(executable,
         "--SocksPort #{port}",
 	"--ControlPort #{control_port}",
@@ -112,6 +113,7 @@ module Service
         "--PidFile #{pid_file}",
         "--Log \"warn syslog\"",
         '--RunAsDaemon 1',
+        exit_nodes ? "--ExitNodes #{exit_nodes}" : "",
         "| logger -t 'tor' 2>&1")
     end
 
